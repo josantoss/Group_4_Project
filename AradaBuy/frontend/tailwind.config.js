@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  // Tailwind CSS v4 configuration - minimal config needed
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'aradabuy-orange': 'var(--orange)',
+        'aradabuy-brown': 'var(--dark-brown)',
+      },
+    },
   },
   plugins: [],
 }
