@@ -13,7 +13,7 @@ const HeroSection = () => {
         backgroundPosition: 'center', 
         backgroundRepeat: 'no-repeat' 
       }}>
-      <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+      <div className="relative z-10 text-center text-orange-500 px-4 max-w-3xl mx-auto">
         <SplitText
           text="New Season, New You"
           className="text-7xl font-semibold text-center text-white"
