@@ -111,7 +111,7 @@ const Footer = () => {
         
         {/* Footer Bottom */}
         <div className="border-t border-soft-white/20 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-soft-white/60 text-sm">© 2024 AradaBuy. All rights reserved.</p>
+          <p className="text-soft-white/60 text-sm">© 2025 AradaBuy. All rights reserved.</p>
           <div className="flex gap-6 mt-4 sm:mt-0">
             {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
               <a 
