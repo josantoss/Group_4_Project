@@ -48,11 +48,11 @@ const Footer = () => {
           
           {/* Company Links */}
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
+            <h4 className="font-semibold mb-4 underline">Company</h4>
             <ul className="space-y-2">
               {['About Us', 'Our Story', 'Careers', 'Press'].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-soft-white/80 hover:text-primary transition-colors duration-200">
+                  <a href="#" className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
                     {item}
                   </a>
                 </li>
@@ -62,11 +62,11 @@ const Footer = () => {
           
           {/* Support Links */}
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
+            <h4 className="font-semibold mb-4 underline">Support</h4>
             <ul className="space-y-2">
               {['Contact Us', 'Size Guide', 'Shipping Info', 'Returns'].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-soft-white/80 hover:text-primary transition-colors duration-200">
+                  <a href="#" className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
                     {item}
                   </a>
                 </li>
@@ -76,11 +76,11 @@ const Footer = () => {
           
           {/* Shop & Social */}
           <div>
-            <h4 className="font-semibold mb-4">Shop</h4>
+            <h4 className="font-semibold mb-4 text underline">Shop</h4>
             <ul className="space-y-2 mb-6">
               {['Men', 'Women', 'Kids', 'Cultural'].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-soft-white/80 hover:text-primary transition-colors duration-200">
+                  <a href="#" className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
                     {item}
                   </a>
                 </li>
@@ -88,12 +88,12 @@ const Footer = () => {
             </ul>
             
             <div>
-              <h4 className="font-semibold mb-3">Follow Us</h4>
+              <h4 className="font-semibold mb-3 underline">Follow Us</h4>
               <div className="flex gap-3">
                 {[
-                  { icon: <FiInstagram className="h-4 w-4" />, name: 'Instagram' },
-                  { icon: <FiFacebook className="h-4 w-4" />, name: 'Facebook' },
-                  { icon: <FiTwitter className="h-4 w-4" />, name: 'Twitter' }
+                  { icon: <FiInstagram className="h-4 w-4 hover:text-[#CE542C]" />, name: 'Instagram' },
+                  { icon: <FiFacebook className="h-4 w-4 hover:text-[#CE542C]" />, name: 'Facebook' },
+                  { icon: <FiTwitter className="h-4 w-4 hover:text-[#CE542C]" />, name: 'Twitter' }
                 ].map((social) => (
                   <a 
                     key={social.name}
@@ -117,7 +117,7 @@ const Footer = () => {
               <a 
                 key={item}
                 href="#" 
-                className="text-soft-white/60 hover:text-primary text-sm transition-colors duration-200"
+                className="text-soft-white/60 hover:text-primary text-sm transition-colors duration-200 hover:text-[#CE542C]"
               >
                 {item}
               </a>

@@ -17,8 +17,8 @@ const HeroSection = () => {
         <SplitText
           text="New Season, New You"
           className="text-7xl font-semibold text-center text-white"
-          delay={100}
-          duration={0.1}
+          delay={20}
+          duration={0.8}
           ease="power3.out"
           splitType="chars"
           from={{ opacity: 0, y: 40 }}
@@ -33,7 +33,7 @@ const HeroSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a href="/shop">
             <button
-              className="bg-white text-[#2c3037] border border-[#2c3037]/20 font-semibold px-8 py-3 rounded-md shadow-lg hover:bg-[#CE542C] hover:text-white transition-all duration-200"
+              className="bg-white text-[#2c3037] border border-[#2c3037]/20 font-semibold px-8 py-3 rounded-md shadow-lg hover:bg-gray-900 hover:text-white transition-all duration-200"
               style={{ minWidth: 160 }}
             >
               Shop Now
@@ -41,8 +41,8 @@ const HeroSection = () => {
           </a>
           <a href="/about">
             <button
-              className="border border-white/30 text-white px-8 py-3 rounded-md transition-all hover:bg-white hover:text-black font-semibold"
-              style={{ minWidth: 160, backgroundColor: 'transparent' }}
+              className="border border-white text-white px-8 py-3 rounded-md transition-all hover:bg-white hover:text-black font-semibold"
+              style={{ minWidth: 160 }}
             >
               Explore Collection
             </button>
@@ -144,20 +144,20 @@ const FeaturedProductsSection = () => {
     },
     {
       image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
-      name: 'Ethiopian Heritage Shirt',
+      name: 'Jeans Jacket',
       price: 89,
       rating: 5,
       classification: 'Cultural',
     },
     {
-      image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80',
+      image: 'https://images.unsplash.com/photo-1615206798678-910e30c5666a?auto=format&fit=crop&w=600&q=80',
       name: 'Organic Linen Trousers',
       price: 119,
       rating: 4,
       classification: 'Women',
     },
     {
-      image: 'https://images.unsplash.com/photo-1469398715555-76331a6c7c9b?auto=format&fit=crop&w=600&q=80',
+      image: 'https://images.unsplash.com/photo-1633972767447-5098f0322a45?auto=format&fit=crop&w=600&q=80',
       name: 'Sustainable Wool Sweater',
       price: 169,
       rating: 4.8,
@@ -374,7 +374,11 @@ const ShopByCategorySection = () => {
                   {category.description}
                 </p>
                 <a href="/shop">
-                  <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-soft-white text-charcoal border border-charcoal/20 hover:bg-charcoal hover:text-soft-white shadow-lg hover:shadow-xl hover:scale-105 h-10 px-4 py-2 transform transition-all duration-300 group-hover:translate-y-[-4px] group-hover:scale-105">
+                  <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background 
+                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none 
+                  disabled:opacity-50 bg-white text-black border border-white hover:bg-charcoal hover:text-white shadow-lg 
+                  hover:shadow-xl hover:scale-105 h-10 px-4 py-2 transform transition-all duration-300 group-hover:translate-y-[-4px] 
+                  group-hover:scale-105">
                     Shop Now
                   </button>
                 </a>
