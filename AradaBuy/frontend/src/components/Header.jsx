@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiMenu, FiShoppingCart, FiUser, FiChevronDown } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,7 +40,7 @@ const Header = () => {
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             <a className="text-gray-800 hover:text-orange-600 transition-colors duration-200" href="/">Home</a>
-            <a className="text-gray-800 hover:text-orange-600 transition-colors duration-200" href="/about">About Us</a>
+            <Link to="/about" className="text-gray-800 hover:text-orange-600 transition-colors duration-200" href="/about">About Us</Link>
             <div className="relative">
               <button
                 type="button"

@@ -226,7 +226,9 @@ const StyleWrappedSection = () => {
             <div className="flex flex-col space-y-1.5 p-6 pb-3">
               <div className="flex items-center justify-between">
                 <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Most Loved Style</h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart h-5 w-5 text-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
+                className="lucide lucide-heart h-5 w-5 text-red-500">
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                 </svg>
               </div>
@@ -280,10 +282,10 @@ const StyleWrappedSection = () => {
             <div>
               <h4 className="font-medium text-charcoal mb-2">Color Palette Preference</h4>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-6 h-6 bg-primary rounded-full"></div>
-                <div className="w-6 h-6 bg-charcoal rounded-full"></div>
+                <div className="w-6 h-6 bg-[#CE542C] rounded-full"></div>
+                <div className="w-6 h-6 bg-black rounded-full"></div>
                 <div className="w-6 h-6 bg-warm-beige rounded-full border border-border"></div>
-                <div className="w-6 h-6 bg-soft-gray rounded-full"></div>
+                <div className="w-6 h-6 bg-gray-600 rounded-full"></div>
               </div>
               <p className="text-sm text-muted-foreground">
                 You gravitate towards warm, earthy tones that reflect your sophisticated taste.

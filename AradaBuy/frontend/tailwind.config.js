@@ -6,6 +6,7 @@ export default {
       colors: {
         'aradabuy-orange': 'var(--orange)',
         'aradabuy-brown': 'var(--dark-brown)',
+        
       },
     },
   },
