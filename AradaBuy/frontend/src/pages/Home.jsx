@@ -2,6 +2,7 @@ import React from 'react';
 import { FiShield, FiStar, FiShoppingCart, FiFeather } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
 import SplitText from '../components/SplitText';
+import FeaturedProductsSection from '../components/ProductCard';
 
 // Hero section component
 const HeroSection = () => {
@@ -131,60 +132,6 @@ const ProductCard = ({ image, name, price, rating, classification }) => (
     </div>
   </div>
 );
-
-// Featured products section
-const FeaturedProductsSection = () => {
-  const featuredProducts = [
-    {
-      image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80',
-      name: 'Minimalist Cotton Blazer',
-      price: 149,
-      rating: 4.5,
-      classification: 'Unisex',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
-      name: 'Jeans Jacket',
-      price: 89,
-      rating: 5,
-      classification: 'Cultural',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1615206798678-910e30c5666a?auto=format&fit=crop&w=600&q=80',
-      name: 'Organic Linen Trousers',
-      price: 119,
-      rating: 4,
-      classification: 'Women',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1633972767447-5098f0322a45?auto=format&fit=crop&w=600&q=80',
-      name: 'Sustainable Wool Sweater',
-      price: 169,
-      rating: 4.8,
-      classification: 'Unisex',
-    },
-  ];
-
-  return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-[#2c3037]">
-            Featured Products
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Carefully curated collection blending modern style with heritage.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.name} {...product} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 // Style wrapped section
 const StyleWrappedSection = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FiMenu, FiShoppingCart, FiUser, FiChevronDown } from 'react-icons/fi';
+import { FiMenu,FiHeart, FiShoppingCart, FiUser, FiChevronDown } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -71,13 +71,20 @@ const Header = () => {
                 <FiShoppingCart className="h-5 w-5" />
               </button>
             </a>
+            <a href="/wishlist">
+              <button className="inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-900 hover:text-white transition">
+                <FiHeart className="h-5 w-5" />
+              </button>
+            </a>
+            <a href="/user">
             <button className="inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-900 hover:text-white transition">
               <FiUser className="h-5 w-5" />
             </button>
+            </a>
           </div>
           <div className="md:hidden">
             <button className="inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100 transition">
-              <FiMenu className="h-6 w-6" />
+              <FiMenu className="h-5 w-5" />
             </button>
           </div>
         </div>
