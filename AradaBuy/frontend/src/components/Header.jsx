@@ -71,7 +71,7 @@ const Header = () => {
                 <FiShoppingCart className="h-5 w-5" />
               </button>
             </a>
-            <a href="/wishlist">
+            <a href="/WishList">
               <button className="inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-900 hover:text-white transition">
                 <FiHeart className="h-5 w-5" />
               </button>
