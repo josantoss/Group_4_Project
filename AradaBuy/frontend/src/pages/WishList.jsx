@@ -1,17 +1,17 @@
 import { useWishList } from '../context/WishListContext';
-import { FiShoppingCart, FiHeart } from 'react-icons/fi';
+import { FiShoppingCart, FiHeart, FiTrash2 } from 'react-icons/fi'; 
 import { FaStar } from 'react-icons/fa';
 
 const WishList = () => {
-  const { WishList } = useWishList();
+  const { WishList, removeFromWishList } = useWishList(); 
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl lg:text-4xl font-bold text-[#2c3037] mb-4">
-          Your WishList
+        <h1 className="text-3xl lg:text-4xl font-bold text-[#2c3037] mb-4 text-center">
+          Your <span className="text-orange-500">WishList</span>
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-gray-600 text-center">
           {WishList.length} {WishList.length === 1 ? 'item' : 'items'} saved
         </p>
       </div>
@@ -27,8 +27,17 @@ const WishList = () => {
           {WishList.map((product) => (
             <div 
               key={product.id} 
-              className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200"
+              className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200 relative group"
             >
+              {/*Delete button */}
+              <button
+                onClick={() => removeFromWishList(product.id)}
+                className="absolute top-3 right-3 p-2 bg-white/90 hover:bg-white rounded-full shadow-md transition-all duration-200 z-10 opacity-0 group-hover:opacity-100"
+                aria-label="Remove from wishlist"
+              >
+                <FiTrash2 className="h-4 w-4 text-red-500" />
+              </button>
+              
               <div className="relative">
                 <img 
                   src={product.image} 

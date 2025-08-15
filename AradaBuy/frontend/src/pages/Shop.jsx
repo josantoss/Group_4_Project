@@ -26,13 +26,15 @@ const ProductCard = ({
 
   return (
     <div 
-      className="relative bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300"
+      className="relative bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200 
+      hover:shadow-lg transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Wishlist added message */}
       {showAddedMessage && showWishListMessage && (
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md flex items-center gap-2 z-10 animate-bounce">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md flex 
+        items-center gap-2 z-10 animate-bounce">
           <FiCheck /> Added to wishlist!
         </div>
       )}
@@ -204,7 +206,7 @@ const products = [
         <h1 className="text-3xl lg:text-4xl font-bold text-[#2c3037] mb-4 text-center">
           {category === 'all' 
             ? 'Shop All Products' 
-            : `Shop ${category.charAt(0).toUpperCase() + category.slice(1)}`}
+            : `Shop For ${category.charAt(0).toUpperCase() + category.slice(1)}`}
         </h1>
         <p className="text-lg text-gray-600 text-center">
           Carefully curated collection blending modern style with heritage.

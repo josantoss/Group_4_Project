@@ -25,8 +25,13 @@ export const WishListProvider = ({ children }) => {
     });
   };
 
+  //Delete System
+  const removeFromWishList = (productId) => {
+    setWishList(prev => prev.filter(item => item.id !== productId));
+  };
+
   return (
-    <WishListContext.Provider value={{ WishList, addToWishList }}>
+    <WishListContext.Provider value={{ WishList, addToWishList, removeFromWishList}}>
       {children}
     </WishListContext.Provider>
   );
