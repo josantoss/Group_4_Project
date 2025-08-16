@@ -3,6 +3,7 @@ import { FiMail, FiPhone, FiMapPin, FiInstagram, FiFacebook, FiTwitter } from 'r
 
 
 const Footer = () => {
+
   const shopItems = [
     { name: 'Men', link: '/shop/men' },
     { name: 'Women', link: '/shop/women' },
@@ -10,6 +11,14 @@ const Footer = () => {
     { name: 'Youth', link: '/shop/youth' },
     { name: 'Ethiopia Culture', link: '/shop/ethiopia-culture' },
   ];
+
+   const companyLinks = [
+    {name: 'About Us', link: '/about'} ,
+    {name: 'Our Story', link: '/about'},
+    {name: 'Careers', link: '/'},
+    {name: 'Press', link: '/'}
+    ]
+
   return (
     <footer className="bg-[#2d3436]  text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 ">
@@ -58,10 +67,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4 underline">Company</h4>
             <ul className="space-y-2">
-              {['About Us', 'Our Story', 'Careers', 'Press'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
-                    {item}
+              {companyLinks.map((item) => (
+                <li key={item.name}>
+                  <a href={item.link} 
+                  className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
+                    {item.name}
                   </a>
                 </li>
               ))}

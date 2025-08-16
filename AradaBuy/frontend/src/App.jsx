@@ -1,17 +1,19 @@
-import { useState } from 'react'
-import Header from './components/Header'
-import Home from './pages/Home'
-import Footer from './components/Footer'
+import { useState } from 'react';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Footer from './components/Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import About from './pages/About'
-import Shop from './pages/Shop'
+import About from './pages/About';
+import Shop from './pages/Shop';
 import WishList from './pages/WishList'; 
-import { WishListProvider } from './context/WishListContext'; 
+import { WishListProvider } from './context/WishListContext';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <WishListProvider> 
       <Router>
+        <ScrollToTop />
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
@@ -27,7 +29,7 @@ function App() {
         <Footer />
       </Router>
     </WishListProvider>
-  )
+  );
 }
 
-export default App
+export default App;
