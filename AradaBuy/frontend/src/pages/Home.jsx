@@ -1,8 +1,10 @@
 import React from 'react';
-import { FiShield, FiStar, FiShoppingCart, FiFeather } from 'react-icons/fi';
-import { FaStar } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { FiShield, FiStar, FiShoppingCart, FiFeather,FiCheck } from 'react-icons/fi';
+import { FaStar,FaHeart } from 'react-icons/fa';
 import SplitText from '../components/SplitText';
-import FeaturedProductsSection from '../components/ProductCard';
+import { useWishList } from '../context/WishListContext';
+
 
 // Hero section component
 const HeroSection = () => {
@@ -40,7 +42,7 @@ const HeroSection = () => {
               Shop Now
             </button>
           </a>
-          <a href="/about">
+          <a href="/shop">
             <button
               className="border border-white text-white px-8 py-3 rounded-md transition-all hover:bg-white hover:text-black font-semibold"
               style={{ minWidth: 160 }}
@@ -54,84 +56,155 @@ const HeroSection = () => {
   );
 };
 
-// Feature card component
-const FeatureCard = ({ icon, title, description }) => (
-  <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 text-center h-72 max-w-sm mx-auto flex flex-col justify-center transform hover:-translate-y-2">
-    <div className="flex justify-center mb-4 mt-0">
-      <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#CE542C]/10 mx-auto mb-2">
-        {React.cloneElement(icon, { className: "h-8 w-8 text-[#CE542C]" })}
-      </div>
-    </div>
-    <h3 className="text-xl font-semibold mb-2 text-[#2c3037]">{title}</h3>
-    <p className="text-gray-600">{description}</p>
-  </div>
-);
+const FeaturedProductsSection = () => {
+  const { WishList, addToWishList } = useWishList();
+  const [showWishListMessage, setShowWishListMessage] = useState(true);
+  const [hoveredProduct, setHoveredProduct] = useState(null);
 
-// Features section
-const FeaturesSection = () => {
+  // Sample featured products data
+  const featuredProducts = [
+    {
+      id: 1,
+      name: 'Minimalist Cotton Blazer',
+      price: 149,
+      originalPrice: 199,
+      rating: 4,
+      reviewCount: 124,
+      image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80',
+      onSale: true,
+      classification: 'Premium'
+    },
+    {
+      id: 2,
+      name: 'Ethiopian Heritage Shirt',
+      price: 89,
+      rating: 4.5,
+      reviewCount: 89,
+      image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
+      classification: 'Cultural'
+    },
+    {
+      id: 3,
+      name: 'Organic Linen Trousers',
+      price: 119,
+      rating: 4,
+      reviewCount: 156,
+      image: 'https://images.unsplash.com/photo-1615206798678-910e30c5666a?auto=format&fit=crop&w=600&q=80',
+      classification: 'Eco-Friendly'
+    },
+    {
+      id: 4,
+      name: 'Sustainable Wool Sweater',
+      price: 169,
+      rating: 4.8,
+      reviewCount: 203,
+      image: 'https://images.unsplash.com/photo-1633972767447-5098f0322a45?auto=format&fit=crop&w=600&q=80',
+      classification: 'Eco-Friendly'
+    }
+  ];
+
+  const isInWishList = (productId) => {
+    return WishList.some(item => item.id === productId);
+  };
+
+  const handleWishListClick = (product) => {
+    addToWishList(product);
+    setShowWishListMessage(true);
+    setTimeout(() => setShowWishListMessage(false), 2000);
+  };
+
   return (
-    <section className="py-20" style={{ background: '#f5eee6' }}>
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-[#2c3037]">
-            Why Choose AradaBuy?
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#2c3037] mb-6">
+            Featured Products
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            At AradaBuy, we believe fashion should be both beautiful and meaningful. Our mission is to create timeless pieces that honor Ethiopian heritage while embracing contemporary minimalism.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Discover our handpicked selection of premium and cultural items.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8 justify-items-center">
-          <FeatureCard
-            icon={<FiShield />}
-            title="Premium Quality"
-            description="Carefully crafted garments using the finest materials and ethical manufacturing processes."
-          />
-          <FeatureCard
-            icon={<FiStar />}
-            title="Timeless Style"
-            description="Minimalist designs that transcend trends, perfect for the modern, conscious consumer."
-          />
-          <FeatureCard
-            icon={<FiFeather />}
-            title="Sustainable Fashion"
-            description="Committed to environmental responsibility and supporting local Ethiopian artisans."
-          />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {featuredProducts.map((product) => {
+            const isWishListed = isInWishList(product.id);
+            return (
+              <div 
+                key={product.id}
+                className="relative bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200 
+                hover:shadow-lg transition-all duration-300"
+                onMouseEnter={() => setHoveredProduct(product.id)}
+                onMouseLeave={() => setHoveredProduct(null)}
+              >
+                {/* Wishlist button */}
+                <button 
+                  onClick={() => handleWishListClick(product)}
+                  className="absolute top-3 right-3 p-2 bg-white/90 hover:bg-white rounded-full shadow-md transition-all duration-200 z-10"
+                >
+                  {isWishListed ? (
+                    <FaHeart className="h-4 w-4 text-[#CE542C]" />
+                  ) : (
+                    <FaHeart className="h-4 w-4 text-gray-700 hover:text-[#CE542C]" />
+                  )}
+                </button>
+
+                {/* Wishlist added message */}
+                {showWishListMessage && hoveredProduct === product.id && isWishListed && (
+                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md flex 
+                  items-center gap-2 z-10 animate-bounce">
+                    <FiCheck /> Added to wishlist!
+                  </div>
+                )}
+
+                <div className="relative">
+                  <img 
+                    src={product.image} 
+                    alt={product.name} 
+                    className={`h-48 w-full object-cover transition-transform duration-500 ${hoveredProduct === product.id ? 'scale-105' : 'scale-100'}`}
+                  />
+                  {product.onSale && (
+                    <div className="absolute top-3 left-3 bg-[#CE542C] text-white text-xs font-semibold px-2 py-1 rounded-full">
+                      SALE
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex-1 flex flex-col justify-between p-4">
+                  <div>
+                    <span className="inline-block text-xs px-2 py-1 rounded-full bg-[#f5eee6] text-[#CE542C] font-semibold mb-2">
+                      {product.classification}
+                    </span>
+                    <h3 className="font-semibold text-lg text-[#2c3037] mb-1">{product.name}</h3>
+                    <div className="flex items-center mb-2">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <FaStar
+                          key={i}
+                          className={`h-4 w-4 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                        />
+                      ))}
+                      <span className="ml-2 text-sm text-gray-500">({product.reviewCount})</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#CE542C] font-bold text-xl">${product.price}</span>
+                      {product.originalPrice && (
+                        <span className="text-sm text-gray-400 line-through">${product.originalPrice}</span>
+                      )}
+                    </div>
+                  </div>
+                  <button className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#CE542C] text-white hover:bg-[#a53e1e] transition-colors duration-200">
+                    <FiShoppingCart />
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 };
 
-// Product card component
-const ProductCard = ({ image, name, price, rating, classification }) => (
-  <div className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
-    <img src={image} alt={name} className="h-48 w-full object-cover" />
-    <div className="flex-1 flex flex-col justify-between p-4">
-      <div>
-        <span className="inline-block text-xs px-2 py-1 rounded-full bg-[#f5eee6] text-[#CE542C] font-semibold mb-2">
-          {classification}
-        </span>
-        <h3 className="font-semibold text-lg text-[#2c3037] mb-1">{name}</h3>
-        <div className="flex items-center mb-2">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <FaStar
-              key={i}
-              className={`h-4 w-4 ${i < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-300'}`}
-            />
-          ))}
-          <span className="ml-2 text-sm text-gray-500">{rating}</span>
-        </div>
-        <span className="text-[#CE542C] font-bold text-xl">${price}</span>
-      </div>
-      <button
-        className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#CE542C] text-white hover:bg-[#a53e1e] transition-colors duration-200"
-      >
-        <FiShoppingCart />
-        Add to Cart
-      </button>
-    </div>
-  </div>
-);
 
 // Style wrapped section
 const StyleWrappedSection = () => {
@@ -347,7 +420,6 @@ const Home = () => {
   return (
     <main>
       <HeroSection />
-      <FeaturesSection />
       <FeaturedProductsSection />
       <StyleWrappedSection />
       <ShopByCategorySection />

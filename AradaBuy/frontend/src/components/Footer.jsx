@@ -1,7 +1,15 @@
 import React from 'react';
 import { FiMail, FiPhone, FiMapPin, FiInstagram, FiFacebook, FiTwitter } from 'react-icons/fi';
 
+
 const Footer = () => {
+  const shopItems = [
+    { name: 'Men', link: '/shop/men' },
+    { name: 'Women', link: '/shop/women' },
+    { name: 'Kids', link: '/shop/kids' },
+    { name: 'Youth', link: '/shop/youth' },
+    { name: 'Ethiopia Culture', link: '/shop/ethiopia-culture' },
+  ];
   return (
     <footer className="bg-[#2d3436]  text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 ">
@@ -78,10 +86,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4 text underline">Shop</h4>
             <ul className="space-y-2 mb-6">
-              {['Men', 'Women', 'Kids', 'Cultural'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
-                    {item}
+              {shopItems.map((item) => (
+                <li key={item.name}>
+                  <a href={item.link} 
+                  className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
+                    {item .name}
                   </a>
                 </li>
               ))}
