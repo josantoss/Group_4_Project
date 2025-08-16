@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { FiShield, FiStar, FiShoppingCart, FiFeather,FiCheck } from 'react-icons/fi';
-import { FaStar,FaHeart } from 'react-icons/fa';
+import { FaStar,FaHeart,FaRegHeart } from 'react-icons/fa';
 import SplitText from '../components/SplitText';
 import { useWishList } from '../context/WishListContext';
 import { Link } from 'react-router-dom';
+import Button from '../components/Button';
 
 
 // Hero section component
@@ -35,22 +36,24 @@ const HeroSection = () => {
           Discover our latest collection of minimalist, unisex clothing that celebrates both modern style and Ethiopian cultural heritage.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="/shop">
-            <button
+            <Button
+              variant="secondary"
+              size="large"
+              href="/shop"
               className="bg-white text-[#2c3037] border border-[#2c3037]/20 font-semibold px-8 py-3 rounded-md shadow-lg hover:bg-gray-900 hover:text-white transition-all duration-200"
               style={{ minWidth: 160 }}
             >
               Shop Now
-            </button>
-          </a>
-          <a href="/shop">
-            <button
+            </Button>
+            <Button
+              variant="outline"
+              size="large"
+              href="/shop"
               className="border border-white text-white px-8 py-3 rounded-md transition-all hover:bg-white hover:text-black font-semibold"
               style={{ minWidth: 160 }}
             >
               Explore Collection
-            </button>
-          </a>
+            </Button>
         </div>
       </div>
     </section>
@@ -145,7 +148,7 @@ const FeaturedProductsSection = () => {
                   {isWishListed ? (
                     <FaHeart className="h-4 w-4 text-[#CE542C]" />
                   ) : (
-                    <FaHeart className="h-4 w-4 text-gray-700 hover:text-[#CE542C]" />
+                    <FaRegHeart className="h-4 w-4 text-gray-700 hover:text-[#CE542C]" />
                   )}
                 </button>
 
@@ -192,10 +195,14 @@ const FeaturedProductsSection = () => {
                       )}
                     </div>
                   </div>
-                  <button className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#CE542C] text-white hover:bg-[#a53e1e] transition-colors duration-200">
-                    <FiShoppingCart />
+                  <Button 
+                      variant="primary"
+                      size="medium"
+                      className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#CE542C] text-white hover:bg-[#a53e1e] transition-colors duration-200">
+                      icon={FiShoppingCart}
+
                     Add to Cart
-                  </button>
+                  </Button>
                 </div>
               </div>
             );
@@ -401,13 +408,16 @@ const ShopByCategorySection = () => {
                 <p className="text-soft-white/90 mb-4 transform transition-transform duration-300 group-hover:translate-y-[-4px]">
                   {category.description}
                 </p>
-                <div className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background 
+                <Button 
+                variant="secondary"
+                size="medium"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background 
                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none 
                   disabled:opacity-50 bg-white text-black border border-white hover:bg-charcoal hover:text-white shadow-lg 
                   hover:shadow-xl hover:scale-105 h-10 px-4 py-2 transform transition-all duration-300 group-hover:translate-y-[-4px] 
                   group-hover:scale-105">
                   Shop Now
-                </div>
+                </Button>
               </div>
 
               <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
