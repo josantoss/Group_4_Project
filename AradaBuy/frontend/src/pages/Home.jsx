@@ -4,6 +4,7 @@ import { FiShield, FiStar, FiShoppingCart, FiFeather,FiCheck } from 'react-icons
 import { FaStar,FaHeart } from 'react-icons/fa';
 import SplitText from '../components/SplitText';
 import { useWishList } from '../context/WishListContext';
+import { Link } from 'react-router-dom';
 
 
 // Hero section component
@@ -335,28 +336,32 @@ const ShopByCategorySection = () => {
       title: "Men's Collection",
       description: "Sophisticated essentials for the modern gentleman",
       image: "https://images.unsplash.com/photo-1516826957135-700dedea698c?w=600&h=400&fit=crop",
-      delay: "0s"
+      delay: "0s",
+      link: "/shop/men"
     },
     {
       id: 2,
       title: "Women's Collection",
       description: "Elegant pieces that celebrate feminine strength",
       image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=400&fit=crop",
-      delay: "0.1s"
+      delay: "0.1s",
+      link: "/shop/women"
     },
     {
       id: 3,
       title: "Kids & Youth",
       description: "Comfortable, stylish clothing for the next generation",
       image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop",
-      delay: "0.2s"
+      delay: "0.2s",
+      link: '/shop/kids'
     },
     {
       id: 4,
       title: "Ethiopian Cultural",
       description: "Traditional designs reimagined for contemporary life",
       image: "https://images.unsplash.com/photo-1599584083055-3793a057b6de?w=600&h=400&fit=crop",
-      delay: "0.3s"
+      delay: "0.3s",
+      link: "/shop/ethiopia-culture"
     }
   ];
 
@@ -364,19 +369,20 @@ const ShopByCategorySection = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-charcoal mb-6 fade-in">
+          <h2 className="text-3xl lg:text-4xl font-bold text-charcoal mb-6">
             Shop by Category
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto slide-up">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Explore our diverse collections designed for every style and occasion.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {categories.map((category) => (
-            <div 
+            <Link 
+              to={category.link} 
               key={category.id}
-              className="group relative overflow-hidden rounded-xl shadow-lg text-white hover:shadow-xl transition-all duration-500 hover-lift"
+              className="group relative overflow-hidden rounded-xl shadow-lg text-white hover:shadow-xl transition-all duration-500 hover-lift block"
               style={{ animationDelay: category.delay }}
             >
               <div className="aspect-[4/3] overflow-hidden">
@@ -395,19 +401,17 @@ const ShopByCategorySection = () => {
                 <p className="text-soft-white/90 mb-4 transform transition-transform duration-300 group-hover:translate-y-[-4px]">
                   {category.description}
                 </p>
-                <a href="/shop">
-                  <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background 
+                <div className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background 
                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none 
                   disabled:opacity-50 bg-white text-black border border-white hover:bg-charcoal hover:text-white shadow-lg 
                   hover:shadow-xl hover:scale-105 h-10 px-4 py-2 transform transition-all duration-300 group-hover:translate-y-[-4px] 
                   group-hover:scale-105">
-                    Shop Now
-                  </button>
-                </a>
+                  Shop Now
+                </div>
               </div>
 
               <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
