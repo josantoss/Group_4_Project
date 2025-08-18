@@ -8,8 +8,8 @@ const ProductCard = ({
   name, 
   price, 
   originalPrice,
-  rating,
-  reviewCount,
+  rating = 0, // Default value if undefined
+  reviewCount = 0, // Default value if undefined
   classification,
   onSale,
   onAddToCart
@@ -33,6 +33,9 @@ const ProductCard = ({
       });
     }
   };
+
+  // Convert rating to number and ensure it's between 0-5
+  const normalizedRating = Math.min(Math.max(Number(rating) || 0, 0), 5);
 
   return (
     <div className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
@@ -59,11 +62,11 @@ const ProductCard = ({
             {Array.from({ length: 5 }).map((_, i) => (
               <FaStar
                 key={i}
-                className={`h-4 w-4 ${i < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                className={`h-4 w-4 ${i < Math.floor(normalizedRating) ? 'text-yellow-400' : 'text-gray-300'}`}
               />
             ))}
             <span className="ml-2 text-sm text-gray-500">
-              {rating.toFixed(1)} ({reviewCount})
+              {normalizedRating.toFixed(1)} ({reviewCount})
             </span>
           </div>
           <div className="flex items-center gap-2">

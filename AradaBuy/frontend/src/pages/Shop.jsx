@@ -6,7 +6,7 @@ import { useCart } from '../context/CartContext';
 
 
 const ProductCard = ({ 
-  product, 
+  product,  
   onAddToWishList, 
   isInWishList,
   showWishListMessage,
@@ -203,16 +203,16 @@ const products = [
   const [sortOption, setSortOption] = useState('default');
   const [isSortOpen, setIsSortOpen] = useState(false);
 
+
+
   // Filter products based on category and search query
   const filteredProducts = products.filter(product => {
-    // Category filter
     const categoryMatch = 
-      category === 'all' ? true:
+      category === 'all' ? true :
       category === 'ethiopia-culture' ? 
         product.category === 'ethiopia-culture' : 
         product.category === category;
     
-    // Search filter
     const searchMatch = 
       searchQuery === '' ||
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -224,14 +224,10 @@ const products = [
   // Sort products based on selected option
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch(sortOption) {
-      case 'price-low-high':
-        return a.price - b.price;
-      case 'price-high-low':
-        return b.price - a.price;
-      case 'rating':
-        return b.rating - a.rating;
-      default:
-        return 0;
+      case 'price-low-high': return a.price - b.price;
+      case 'price-high-low': return b.price - a.price;
+      case 'rating': return b.rating - a.rating;
+      default: return 0;
     }
   });
 
@@ -363,7 +359,7 @@ const products = [
           {sortedProducts.map((product) => (
             <ProductCard
               key={product.id}
-              product={product}  // Pass the whole product object
+              product={product}
               onAddToCart={addToCart}
               onAddToWishList={addToWishList}
               isInWishList={isInWishList(product.id)}
