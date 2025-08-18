@@ -1,11 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 
 const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Send the data to backend
+    console.log('Form submitted:', formData);
+    setIsSubmitted(true);
+    // Reset form after submission
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+    // Hide message after 5 seconds
+    setTimeout(() => setIsSubmitted(false), 5000);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header*/}
+        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
             <span className='text-orange-500'>Contact</span> Us
@@ -14,6 +46,14 @@ const ContactUs = () => {
             We'd love to hear from you! Reach out to our team for any questions or feedback.
           </p>
         </div>
+
+        {/* Success Message */}
+        {isSubmitted && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-8 max-w-3xl mx-auto text-center">
+            <p className="font-bold">Thank you for contacting us!</p>
+            <p>We'll get back to you soon.</p>
+          </div>
+        )}
 
         {/* Contact Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -69,7 +109,7 @@ const ContactUs = () => {
         {/* Contact Form */}
         <div className="bg-white shadow-md rounded-lg p-8 max-w-3xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h2>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -78,7 +118,10 @@ const ContactUs = () => {
                 <input
                   type="text"
                   id="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                  required
                 />
               </div>
               <div>
@@ -88,7 +131,10 @@ const ContactUs = () => {
                 <input
                   type="email"
                   id="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                  required
                 />
               </div>
             </div>
@@ -99,7 +145,10 @@ const ContactUs = () => {
               <input
                 type="text"
                 id="subject"
+                value={formData.subject}
+                onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                required
               />
             </div>
             <div>
@@ -109,7 +158,10 @@ const ContactUs = () => {
               <textarea
                 id="message"
                 rows={4}
+                value={formData.message}
+                onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                required
               />
             </div>
             <div>
