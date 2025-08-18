@@ -98,7 +98,7 @@ const Header = () => {
             <Link to="/wishlist" className="inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100 transition">
               <FiHeart className="h-5 w-5" />
             </Link>
-            <Link to="/user" className="inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100 transition">
+            <Link to="/login" className="inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100 transition">
               <FiUser className="h-5 w-5" />
             </Link>
           </div>

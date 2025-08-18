@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Shop from './pages/Shop';
 import WishList from './pages/WishList'; 
+import Login from './pages/Login';
+import SignUp from './pages/Signup';
 import { WishListProvider } from './context/WishListContext';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="/shop/ethiopia-culture" element={<Shop category="ethiopia-culture" />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/wishlist" element={<WishList />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
         </Routes>
         <Footer />
       </Router>
