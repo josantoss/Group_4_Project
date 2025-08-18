@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import { FiSearch, FiShoppingCart, FiHeart, FiGrid, FiList, FiChevronDown, FiCheck } from 'react-icons/fi';
 import { FaStar, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { useWishList } from '../context/WishListContext';
+import { useCart } from '../context/CartContext';
+
 
 const ProductCard = ({ 
   product, 
   onAddToWishList, 
   isInWishList,
-  showWishListMessage 
+  showWishListMessage,
+  onAddToCart
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [localIsInWishList, setLocalIsInWishList] = useState(isInWishList);
@@ -22,6 +25,13 @@ const ProductCard = ({
     setLocalIsInWishList(!localIsInWishList);
     setShowAddedMessage(true);
     setTimeout(() => setShowAddedMessage(false), 2000);
+  };
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    if (onAddToCart) {
+      onAddToCart(product);
+    }
   };
 
   return (
@@ -84,7 +94,10 @@ const ProductCard = ({
             )}
           </div>
         </div>
-        <button className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#CE542C] text-white hover:bg-[#a53e1e] transition-colors duration-200">
+        <button 
+          onClick={handleAddToCart}
+          className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#CE542C] text-white hover:bg-[#a53e1e] transition-colors duration-200"
+        >
           <FiShoppingCart />
           Add to Cart
         </button>
@@ -95,7 +108,7 @@ const ProductCard = ({
 
 
 const Shop = ({ category = 'all' }) => {
-
+  const {addToCart} = useCart();
     // Sample product data
 const products = [
   {
@@ -175,7 +188,7 @@ const products = [
     id: 8,
     name: 'Sports Jersey',
     category: 'youth',
-    price: 1900,
+    price: 1800,
     rating: 4.1,
     reviewCount: 53,
     image: 'https://images.unsplash.com/photo-1552066379-e7bfd22155c5?auto=format&fit=crop&w=600&q=80',
@@ -350,7 +363,8 @@ const products = [
           {sortedProducts.map((product) => (
             <ProductCard
               key={product.id}
-              product={product}
+              product={product}  // Pass the whole product object
+              onAddToCart={addToCart}
               onAddToWishList={addToWishList}
               isInWishList={isInWishList(product.id)}
               showWishListMessage={showWishListMessage}

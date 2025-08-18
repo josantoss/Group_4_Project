@@ -12,11 +12,12 @@ import ContactUs from './pages/Contact';
 import Cart from './pages/Cart';
 import { WishListProvider } from './context/WishListContext';
 import ScrollToTop from './components/ScrollToTop';
-
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
     <WishListProvider> 
+    <CartProvider>
       <Router>
         <ScrollToTop />
         <Header />
@@ -37,7 +38,9 @@ function App() {
         </Routes>
         <Footer />
       </Router>
+      </CartProvider>
     </WishListProvider>
+    
   );
 }
 

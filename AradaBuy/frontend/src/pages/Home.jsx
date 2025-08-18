@@ -7,6 +7,7 @@ import { useWishList } from '../context/WishListContext';
 import ProductCard from  '../components/ProductCard'
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
+import { useCart } from '../context/CartContext';
 
 
 // Hero section component
@@ -63,8 +64,10 @@ const HeroSection = () => {
 
 const FeaturedProductsSection = () => {
   const { WishList, addToWishList } = useWishList();
+  const { addToCart } = useCart();
   const [showWishListMessage, setShowWishListMessage] = useState(true);
   const [hoveredProduct, setHoveredProduct] = useState(null);
+
 
   // Sample featured products data
   const featuredProducts = [
@@ -169,6 +172,7 @@ const FeaturedProductsSection = () => {
                   reviewCount={product.reviewCount}
                   classification={product.classification}
                   onSale={product.onSale}
+                  onAddToCart={addToCart}
                 />
               </div>
             );

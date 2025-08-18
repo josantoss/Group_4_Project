@@ -1,3 +1,4 @@
+// src/components/ProductCard.jsx
 import React from 'react';
 import { FiShoppingCart } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
@@ -10,12 +11,28 @@ const ProductCard = ({
   rating,
   reviewCount,
   classification,
-  onSale
+  onSale,
+  onAddToCart
 }) => {
-  // Calculate discount percentage if originalPrice exists
   const discount = originalPrice 
     ? Math.round(((originalPrice - price) / originalPrice) * 100)
     : null;
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    if (onAddToCart) {
+      onAddToCart({
+        image, 
+        name, 
+        price, 
+        originalPrice,
+        rating,
+        reviewCount,
+        classification,
+        onSale
+      });
+    }
+  };
 
   return (
     <div className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
@@ -57,6 +74,7 @@ const ProductCard = ({
           </div>
         </div>
         <button
+          onClick={handleAddToCart}
           className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#CE542C] text-white hover:bg-[#a53e1e] transition-colors duration-200"
         >
           <FiShoppingCart />
