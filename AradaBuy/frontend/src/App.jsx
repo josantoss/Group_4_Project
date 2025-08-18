@@ -8,8 +8,10 @@ import Shop from './pages/Shop';
 import WishList from './pages/WishList'; 
 import Login from './pages/Login';
 import SignUp from './pages/Signup';
+import ContactUs from './pages/Contact';
 import { WishListProvider } from './context/WishListContext';
 import ScrollToTop from './components/ScrollToTop';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="contactus" element={<ContactUs />} />
         </Routes>
         <Footer />
       </Router>

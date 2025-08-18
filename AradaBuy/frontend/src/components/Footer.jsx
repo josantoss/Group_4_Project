@@ -19,6 +19,13 @@ const Footer = () => {
     {name: 'Press', link: '/'}
     ]
 
+    const supportLinks = [
+      {name: 'Contact Us', link: '/contactus'},
+      {name: 'Size Guide', link: '/sizeguide'},
+      {name: 'Shipping info', link: '/shippinginfo'},
+      {name: 'Returns', link: '/returns'}
+    ]
+
   return (
     <footer className="bg-[#2d3436]  text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 ">
@@ -82,10 +89,10 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4 underline">Support</h4>
             <ul className="space-y-2">
-              {['Contact Us', 'Size Guide', 'Shipping Info', 'Returns'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
-                    {item}
+              {supportLinks.map((item) => (
+                <li key={item.name}>
+                  <a href={item.link} className="text-soft-white/80 hover:text-[#CE542C] transition-colors duration-200">
+                    {item.name}
                   </a>
                 </li>
               ))}
