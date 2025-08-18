@@ -6,7 +6,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       {/* Left */}
       <div className="hidden md:flex flex-col items-center justify-center w-1/2 max-w-xl pr-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">AradaBuy</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4"><span className="text-orange-500">Arada</span>Buy</h1>
         <p className="text-xl text-gray-600 mb-2">Your style, your way.</p>
         <p className="text-gray-500 text-center">
           Join our community of style enthusiasts and discover unique pieces that express your personality
@@ -42,7 +42,7 @@ const Login = () => {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full bg-[#CE542C] text-white py-2 px-4 rounded-lg font-medium hover:bg-[#a53e1e] transition-colors"
+              className="w-full bg-orange-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-[#a53e1e] transition-colors"
             >
               Sign In
             </button>
