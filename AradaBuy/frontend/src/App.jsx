@@ -9,6 +9,7 @@ import WishList from './pages/WishList';
 import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import ContactUs from './pages/Contact';
+import Cart from './pages/Cart';
 import { WishListProvider } from './context/WishListContext';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -30,8 +31,9 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="contactus" element={<ContactUs />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/cart" element={<Cart/>} />
         </Routes>
         <Footer />
       </Router>
