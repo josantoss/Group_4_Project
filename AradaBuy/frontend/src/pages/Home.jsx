@@ -4,6 +4,7 @@ import { FiShield, FiStar, FiShoppingCart, FiFeather,FiCheck } from 'react-icons
 import { FaStar,FaHeart,FaRegHeart } from 'react-icons/fa';
 import SplitText from '../components/SplitText';
 import { useWishList } from '../context/WishListContext';
+import ProductCard from  '../components/ProductCard'
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 
@@ -70,9 +71,9 @@ const FeaturedProductsSection = () => {
     {
       id: 1,
       name: 'Minimalist Cotton Blazer',
-      price: 149,
-      originalPrice: 199,
-      rating: 4,
+      price: 1490,
+      originalPrice: 1990,
+      rating: 3,
       reviewCount: 124,
       image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80',
       onSale: true,
@@ -83,14 +84,14 @@ const FeaturedProductsSection = () => {
       name: 'Ethiopian Heritage Shirt',
       price: 89,
       rating: 4.5,
-      reviewCount: 89,
-      image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
+      reviewCount: 850,
+      image: 'https://images.unsplash.com/photo-1558642843-d6351b0ccf51?auto=format&fit=crop&w=600&q=80',
       classification: 'Cultural'
     },
     {
       id: 3,
       name: 'Organic Linen Trousers',
-      price: 119,
+      price: 1100,
       rating: 4,
       reviewCount: 156,
       image: 'https://images.unsplash.com/photo-1615206798678-910e30c5666a?auto=format&fit=crop&w=600&q=80',
@@ -99,10 +100,10 @@ const FeaturedProductsSection = () => {
     {
       id: 4,
       name: 'Sustainable Wool Sweater',
-      price: 169,
-      rating: 4.8,
+      price: 1700,
+      rating: 5,
       reviewCount: 203,
-      image: 'https://images.unsplash.com/photo-1633972767447-5098f0322a45?auto=format&fit=crop&w=600&q=80',
+      image: 'https://images.unsplash.com/photo-1687275162316-a7aa04b036d3?auto=format&fit=crop&w=600&q=80',
       classification: 'Eco-Friendly'
     }
   ];
@@ -135,8 +136,7 @@ const FeaturedProductsSection = () => {
             return (
               <div 
                 key={product.id}
-                className="relative bg-white rounded-xl shadow-md flex flex-col overflow-hidden border border-gray-200 
-                hover:shadow-lg transition-all duration-300"
+                className="relative group"
                 onMouseEnter={() => setHoveredProduct(product.id)}
                 onMouseLeave={() => setHoveredProduct(null)}
               >
@@ -160,50 +160,16 @@ const FeaturedProductsSection = () => {
                   </div>
                 )}
 
-                <div className="relative">
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className={`h-48 w-full object-cover transition-transform duration-500 ${hoveredProduct === product.id ? 'scale-105' : 'scale-100'}`}
-                  />
-                  {product.onSale && (
-                    <div className="absolute top-3 left-3 bg-[#CE542C] text-white text-xs font-semibold px-2 py-1 rounded-full">
-                      SALE
-                    </div>
-                  )}
-                </div>
-                
-                <div className="flex-1 flex flex-col justify-between p-4">
-                  <div>
-                    <span className="inline-block text-xs px-2 py-1 rounded-full bg-[#f5eee6] text-[#CE542C] font-semibold mb-2">
-                      {product.classification}
-                    </span>
-                    <h3 className="font-semibold text-lg text-[#2c3037] mb-1">{product.name}</h3>
-                    <div className="flex items-center mb-2">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <FaStar
-                          key={i}
-                          className={`h-4 w-4 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
-                        />
-                      ))}
-                      <span className="ml-2 text-sm text-gray-500">({product.reviewCount})</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#CE542C] font-bold text-xl">${product.price}</span>
-                      {product.originalPrice && (
-                        <span className="text-sm text-gray-400 line-through">${product.originalPrice}</span>
-                      )}
-                    </div>
-                  </div>
-                  <Button 
-                      variant="primary"
-                      size="medium"
-                      className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#CE542C] text-white hover:bg-[#a53e1e] transition-colors duration-200">
-                      icon={FiShoppingCart}
-
-                    Add to Cart
-                  </Button>
-                </div>
+                <ProductCard 
+                  image={product.image}
+                  name={product.name}
+                  price={product.price}
+                  originalPrice={product.originalPrice}
+                  rating={product.rating}
+                  reviewCount={product.reviewCount}
+                  classification={product.classification}
+                  onSale={product.onSale}
+                />
               </div>
             );
           })}

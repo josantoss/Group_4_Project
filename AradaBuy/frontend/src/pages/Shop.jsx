@@ -102,8 +102,8 @@ const products = [
     id: 1,
     name: 'Minimalist Cotton Blazer',
     category: 'men',
-    price: 149,
-    originalPrice: 199,
+    price: 1490,
+    originalPrice: 1990,
     rating: 4,
     reviewCount: 124,
     image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80',
@@ -115,17 +115,17 @@ const products = [
     id: 2,
     name: 'Ethiopian Heritage Shirt',
     category: 'ethiopia-culture',
-    price: 89,
+    price: 850,
     rating: 4.5,
     reviewCount: 89,
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1558642843-d6351b0ccf51?auto=format&fit=crop&w=600&q=80',
     classification: 'Cultural'
   },
   {
     id: 3,
     name: 'Organic Linen Trousers',
     category: 'women',
-    price: 119,
+    price: 1100,
     rating: 4,
     reviewCount: 156,
     image: 'https://images.unsplash.com/photo-1615206798678-910e30c5666a?auto=format&fit=crop&w=600&q=80',
@@ -135,17 +135,17 @@ const products = [
     id: 4,
     name: 'Sustainable Wool Sweater',
     category: 'women',
-    price: 169,
+    price: 1700,
     rating: 4.8,
     reviewCount: 203,
-    image: 'https://images.unsplash.com/photo-1633972767447-5098f0322a45?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1687275162316-a7aa04b036d3?auto=format&fit=crop&w=600&q=80',
     classification: 'Eco-Friendly'
   },
   {
     id: 5,
     name: 'Men\'s Casual Shirt',
     category: 'men',
-    price: 79,
+    price: 750,
     rating: 4.2,
     reviewCount: 87,
     image: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&w=600&q=80',
@@ -153,9 +153,9 @@ const products = [
   },
   {
     id: 6,
-    name: 'Women\'s Summer Dress',
+    name: 'Women\'s Dress',
     category: 'women',
-    price: 129,
+    price: 1800,
     rating: 4.7,
     reviewCount: 142,
     image: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=600&q=80',
@@ -165,20 +165,20 @@ const products = [
     id: 7,
     name: 'Kids Play Outfit',
     category: 'kids',
-    price: 59,
+    price: 2000,
     rating: 4.3,
     reviewCount: 65,
-    image: 'https://images.unsplash.com/photo-1599443015574-be5fe8a05783?auto=format&fit=crop&w=600&q=80',
+    image: 'https://plus.unsplash.com/premium_photo-1675183690347-662b2f9f3cf7?auto=format&fit=crop&w=600&q=80',
     classification: 'Playwear'
   },
   {
     id: 8,
-    name: 'Youth Sports Jersey',
+    name: 'Sports Jersey',
     category: 'youth',
-    price: 69,
+    price: 1900,
     rating: 4.1,
     reviewCount: 53,
-    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1552066379-e7bfd22155c5?auto=format&fit=crop&w=600&q=80',
     classification: 'Sports'
   }
 ];
@@ -187,12 +187,39 @@ const products = [
   const [searchQuery, setSearchQuery] = useState('');
   const [showWishListMessage, setShowWishListMessage] = useState(true);
   const { WishList, addToWishList } = useWishList();
+  const [sortOption, setSortOption] = useState('default');
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
-  // Filter products based on the selected category
+  // Filter products based on category and search query
   const filteredProducts = products.filter(product => {
-    if (category === 'all') return true;
-    if (category === 'ethiopia-culture') return product.category === 'ethiopia-culture';
-    return product.category === category;
+    // Category filter
+    const categoryMatch = 
+      category === 'all' ? true:
+      category === 'ethiopia-culture' ? 
+        product.category === 'ethiopia-culture' : 
+        product.category === category;
+    
+    // Search filter
+    const searchMatch = 
+      searchQuery === '' ||
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.classification.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    return categoryMatch && searchMatch;
+  });
+
+  // Sort products based on selected option
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch(sortOption) {
+      case 'price-low-high':
+        return a.price - b.price;
+      case 'price-high-low':
+        return b.price - a.price;
+      case 'rating':
+        return b.rating - a.rating;
+      default:
+        return 0;
+    }
   });
 
   // Check if product is in wishlist
@@ -226,7 +253,62 @@ const products = [
           </div>
         </div>
         
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          {/* Sort dropdown */}
+          <div className="relative">
+            <button 
+              onClick={() => setIsSortOpen(!isSortOpen)}
+              className="flex items-center gap-2 h-10 px-4 py-2 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+            >
+              <span>Sort</span>
+              <FiChevronDown className={`transition-transform ${isSortOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isSortOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 border border-gray-200">
+                <div className="py-1">
+                  <button 
+                    onClick={() => {
+                      setSortOption('default');
+                      setIsSortOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm ${sortOption === 'default' ? 'bg-gray-100 text-[#CE542C]' : 'text-gray-700 hover:bg-gray-100'}`}
+                  >
+                    Default
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setSortOption('price-low-high');
+                      setIsSortOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm ${sortOption === 'price-low-high' ? 'bg-gray-100 text-[#CE542C]' : 'text-gray-700 hover:bg-gray-100'}`}
+                  >
+                    Price: Low to High
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setSortOption('price-high-low');
+                      setIsSortOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm ${sortOption === 'price-high-low' ? 'bg-gray-100 text-[#CE542C]' : 'text-gray-700 hover:bg-gray-100'}`}
+                  >
+                    Price: High to Low
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setSortOption('rating');
+                      setIsSortOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm ${sortOption === 'rating' ? 'bg-gray-100 text-[#CE542C]' : 'text-gray-700 hover:bg-gray-100'}`}
+                  >
+                    Highly Rated
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          {/* View mode buttons */}
           <button
             onClick={() => setViewMode('grid')}
             className={`inline-flex items-center justify-center h-10 w-10 rounded-md ${
@@ -246,24 +328,38 @@ const products = [
         </div>
       </div>
 
-      <div className={`gap-6 ${
-        viewMode === 'grid' 
-          ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
-          : 'flex flex-col'
-      }`}>
-        {filteredProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToWishList={addToWishList}
-            isInWishList={isInWishList(product.id)}
-            showWishListMessage={showWishListMessage}
-          />
-        ))}
-      </div>
+      {sortedProducts.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-lg text-gray-600">Sorry, no items found matching your search.</p>
+          <button 
+            onClick={() => {
+              setSearchQuery('');
+              setSortOption('default');
+            }}
+            className="mt-4 px-6 py-2 bg-[#CE542C] text-white rounded-md hover:bg-[#a53e1e] transition-colors"
+          >
+            Clear Filters
+          </button>
+        </div>
+      ) : (
+        <div className={`gap-6 ${
+          viewMode === 'grid' 
+            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+            : 'flex flex-col'
+        }`}>
+          {sortedProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToWishList={addToWishList}
+              isInWishList={isInWishList(product.id)}
+              showWishListMessage={showWishListMessage}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default Shop;
-  
