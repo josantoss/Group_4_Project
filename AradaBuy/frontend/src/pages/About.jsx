@@ -1,6 +1,7 @@
 import React from "react";
 import { FiHeart, FiUsers, FiAward } from "react-icons/fi";
 import { FaLeaf } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const About = () => {
   const features = [
@@ -134,9 +135,11 @@ const About = () => {
             cultural celebration. Discover your new favorite pieces today.
           </p>
           <div className="flex justify-center gap-4">
+            <Link to='/shop'>
             <button className="inline-flex items-center justify-center gap-2 text-base font-medium bg-white text-black hover:bg-gray-100 shadow-lg hover:shadow-xl transform hover:scale-105 h-12 rounded-lg px-6 transition-all duration-300">
               Shop Now
             </button>
+            </Link>
             <button className="inline-flex items-center justify-center gap-2 text-base font-medium bg-black text-white hover:bg-gray-900 shadow-lg hover:shadow-xl transform hover:scale-105 h-12 rounded-lg px-6 transition-all duration-300">
               Learn More
             </button>
