@@ -13,6 +13,7 @@ import Cart from './pages/Cart';
 import { WishListProvider } from './context/WishListContext';
 import ScrollToTop from './components/ScrollToTop';
 import { CartProvider } from './context/CartContext';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/cart" element={<Cart/>} />
+          <Route path="/checkout" element={<Checkout />} />
+
         </Routes>
         <Footer />
       </Router>

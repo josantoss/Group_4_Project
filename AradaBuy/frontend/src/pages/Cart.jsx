@@ -89,9 +89,12 @@ const Cart = () => {
           </div>
 
           <div className="mt-8">
-            <button className="w-full bg-[#CE542C] text-white py-3 px-6 rounded-md hover:bg-[#a53e1e] transition-colors font-semibold shadow-lg hover:shadow-xl">
-              Proceed to Checkout
-            </button>
+            <Link 
+            to="/checkout"
+            className="w-full bg-[#CE542C] text-white py-3 px-6 rounded-md hover:bg-[#a53e1e] transition-colors font-semibold shadow-lg hover:shadow-xl block text-center"
+          >
+            Proceed to Checkout
+          </Link>
           </div>
 
           <div className="mt-4 text-center text-sm text-gray-500">
