@@ -1,13 +1,19 @@
+// routes/paymentRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const PaymentController = require('../controllers/paymentController');
+const { validatePaymentInputs } = require('../utils/validate');
 
-// Telebirr routes
-router.post('/telebirr/pay', PaymentController.payWithTelebirr);       // Initiate payment
-router.post('/telebirr/confirm', PaymentController.confirmTelebirrPayment); // Confirm payment
+// Telebirr
+router.post('/telebirr/pay', validatePaymentInputs, PaymentController.payWithTelebirr);
+router.post('/telebirr/confirm', PaymentController.confirmTelebirrPayment);
 
-// CBE routes
-router.post('/cbe/pay', PaymentController.payWithCBE);                  // Initiate payment
-router.post('/cbe/confirm', PaymentController.confirmCBEPayment);      // Confirm payment
+// CBE
+router.post('/cbe/pay', validatePaymentInputs, PaymentController.payWithCBE);
+router.post('/cbe/confirm', PaymentController.confirmCBEPayment);
+
+// COD
+router.post('/cod/pay', validatePaymentInputs, PaymentController.payWithCOD);
 
 module.exports = router;

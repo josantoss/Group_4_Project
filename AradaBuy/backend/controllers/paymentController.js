@@ -1,82 +1,89 @@
-const Payment = require('../models/paymentModel');
-const axios = require('axios');
-const { sendSuccess, sendError } = require('../utils/responseHandler');
+// controllers/paymentController.js
+
+const { generateOrderId, formatAmount,createPaymentRecord } = require('../utils/paymentHelper');
 
 const PaymentController = {
 
-  async payWithTelebirr(req, res) {
+  payWithTelebirr: async (req, res) => {
     try {
       const { amount, customerPhone } = req.body;
 
-      const response = await axios.post('https://api.telebirr.com/pay', { amount, customerPhone });
-      const paymentId = response.data.paymentId;
-
-      const payment = await Payment.create({
+      // Dummy Telebirr response
+      const payment = {
         method: 'Telebirr',
-        amount,
+        referenceId: generateOrderId('TB'),
+        amount: formatAmount(amount),
         customerPhone,
-        referenceId: paymentId,
-        status: 'pending',
-      });
+        status: 'success'
+      };
 
-      return sendSuccess(res, payment, 'Telebirr payment initiated successfully');
+      return res.json({ success: true, message: 'Telebirr payment started ', data: payment });
     } catch (error) {
-      return sendError(res, error.message || 'Telebirr payment failed');
+      return res.status(500).json({ success: false, message: 'Telebirr payment failed', error: error.message });
     }
   },
 
-  async confirmTelebirrPayment(req, res) {
+  confirmTelebirrPayment: async (req, res) => {
     try {
-      const { paymentId, status } = req.body;
+      const { referenceId, status } = req.body;
 
-      const payment = await Payment.findOne({ where: { referenceId: paymentId, method: 'Telebirr' } });
-      if (!payment) return sendError(res, 'Payment not found', 404);
+      const payment = { referenceId, status: status || 'success', method: 'Telebirr' };
 
-      payment.status = status;
-      await payment.save();
-
-      return sendSuccess(res, payment, 'Telebirr payment confirmed successfully');
+      return res.json({ success: true, message: 'Telebirr payment confirmed ', data: payment });
     } catch (error) {
-      return sendError(res, error.message || 'Telebirr confirmation failed');
+      return res.status(500).json({ success: false, message: 'Telebirr confirmation failed', error: error.message });
     }
   },
 
-  async payWithCBE(req, res) {
+  payWithCBE: async (req, res) => {
     try {
       const { amount, accountNumber } = req.body;
 
-      const response = await axios.post('https://api.cbe.com/pay', { amount, accountNumber });
-      const transactionId = response.data.transactionId;
-
-      const payment = await Payment.create({
+      // Dummy CBE response
+      const payment = {
         method: 'CBE',
-        amount,
+        referenceId: generateOrderId('CBE'),
+        amount: formatAmount(amount),
         accountNumber,
-        referenceId: transactionId,
-        status: 'pending',
-      });
+        status: 'success'
+      };
 
-      return sendSuccess(res, payment, 'CBE payment initiated successfully');
+      return res.json({ success: true, message: 'CBE payment started ', data: payment });
     } catch (error) {
-      return sendError(res, error.message || 'CBE payment failed');
+      return res.status(500).json({ success: false, message: 'CBE payment failed', error: error.message });
     }
   },
 
-  async confirmCBEPayment(req, res) {
+  confirmCBEPayment: async (req, res) => {
     try {
-      const { transactionId, status } = req.body;
+      const { referenceId, status } = req.body;
 
-      const payment = await Payment.findOne({ where: { referenceId: transactionId, method: 'CBE' } });
-      if (!payment) return sendError(res, 'Payment not found', 404);
+      const payment = { referenceId, status: status || 'success', method: 'CBE' };
 
-      payment.status = status;
-      await payment.save();
-
-      return sendSuccess(res, payment, 'CBE payment confirmed successfully');
+      return res.json({ success: true, message: 'CBE payment confirmed ', data: payment });
     } catch (error) {
-      return sendError(res, error.message || 'CBE confirmation failed');
+      return res.status(500).json({ success: false, message: 'CBE confirmation failed', error: error.message });
     }
   },
+
+  payWithCOD: async (req, res) => {
+    try {
+      const { amount, customerPhone } = req.body;
+
+      const payment = {
+        method: 'COD',
+        referenceId: generateOrderId('COD'),
+        amount: formatAmount(amount),
+        customerPhone,
+        status: 'success'
+      };
+
+      return res.json({ success: true, message: 'COD payment started ', data: payment });
+    } catch (error) {
+      return res.status(500).json({ success: false, message: 'COD payment failed', error: error.message });
+    }
+  }
+
 };
 
 module.exports = PaymentController;
